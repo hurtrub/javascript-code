@@ -1,0 +1,134 @@
+$( document ).ready(function() {
+    $.ajax({
+		type: 'post',
+		url: 'php/receiveread.php',
+		data: {
+		  date_receive: $("#date_receive").val()
+		}
+	}).done(function(data){
+		$("#receiveplandata").html(data)
+	})
+    })
+	
+	$(document).on('change','#date_receive', function(){
+	$.ajax({
+		type: 'post',
+		url: 'php/receivefilter.php',
+		data: {
+		  date_receive: $("#date_receive").val()
+		}
+	}).done(function(data){
+		$("#receiveplandata").html(data)
+	})
+	})
+	
+	
+	$(document).on('click','#receive_modal', function(){
+	$.ajax({
+		type: 'post',
+		url: 'php/receive_modal.php'
+	}).done(function(data){
+		$(".modal-title").html('New Record')
+		$(".modal-body").html(data)
+		$(".modal").modal('show')
+	})
+	})
+	
+	$(document).on('click','.receive_view', function(){
+	$.ajax({
+		type: 'post',
+		url: 'php/receive_viewmodal.php',
+		data: {
+				id: $(this).attr('id')
+			}
+	}).done(function(data){
+		$(".modal-title").html('Update Record')
+		$(".modal-body").html(data)
+		$(".modal").modal('show')
+	})
+	})
+	
+	
+	/*****finished******/
+	
+	$( document ).ready(function() {
+    $.ajax({
+		type: 'post',
+		url: 'php/finishedread.php',
+		data: {
+		  date_finished: $("#date_finished").val()
+		}
+	}).done(function(data){
+		$("#finishedplandata").html(data)
+	})
+    })
+	
+	$(document).on('change','#date_finished', function(){
+	$("#monthfinished").val('')	
+	$.ajax({
+		type: 'post',
+		url: 'php/finishedfilter.php',
+		data: {
+		  date_finished: $("#date_finished").val(),
+		  monthfinished: $("#monthfinished").val()
+		}
+	}).done(function(data){
+		$("#finishedplandata").html(data)
+	})
+	})
+	
+	$(document).on('change','#monthfinished', function(){
+	$("#date_finished").val('')
+	$.ajax({
+		type: 'post',
+		url: 'php/finishedfilter.php',
+		data: {
+		  date_finished: $("#date_finished").val(),
+		  monthfinished: $("#monthfinished").val()
+		}
+	}).done(function(data){
+		$("#finishedplandata").html(data)
+	})
+	})
+	
+	$(document).on('click','.finished_view', function(){
+	$.ajax({
+		type: 'post',
+		url: 'php/finished_viewmodal.php',
+		data: {
+				id: $(this).attr('id')
+			}
+	}).done(function(data){
+		$(".modal-title").html('Update Record')
+		$(".modal-body").html(data)
+		$(".modal").modal('show')
+	})
+	})
+	
+	
+	/****pending plan****/
+	
+	$( document ).ready(function() {
+    $.ajax({
+		type: 'post',
+		url: 'php/pendingread.php',
+	}).done(function(data){
+		$("#pendingplandata").html(data)
+	})
+    })
+	
+	$(document).on('click','.pending_view', function(){
+	$.ajax({
+		type: 'post',
+		url: 'php/pending_viewmodal.php',
+		data: {
+				id: $(this).attr('id')
+			}
+	}).done(function(data){
+		$(".modal-title").html('Update Record')
+		$(".modal-body").html(data)
+		$(".modal").modal('show')
+	})
+	})
+	
+	
